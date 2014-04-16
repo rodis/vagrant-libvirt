@@ -83,7 +83,7 @@ module VagrantPlugins
             -N
           ).join(' ')
           ssh_cmd = "ssh $(vagrant ssh-config #{machine}"\
-              "| awk '{print \" -o \"$1\"=\"$2}') #{params} 2>/dev/null"
+              "| sed '1 d' | awk '{print \" -o \"$1\"=\"$2}') #{params} 2>/dev/null"
 
           @logger.debug "Forwarding port with `#{ssh_cmd}`"
           spawn ssh_cmd
